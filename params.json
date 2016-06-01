@@ -1,0 +1,6 @@
+{
+  "name": "ng2-googlechart",
+  "tagline": "Draw simply",
+  "body": "# ng2-googlechart\r\n\r\n<h3>Step 1:Add the following code into your index.html</h3>\r\n<pre>&lt;<span class=\"pl-ent\">script</span><span class=\"pl-e\"> src</span>=<span class=\"pl-s\"><span class=\"pl-pds\">\"</span>https://www.google.com/jsapi<span class=\"pl-pds\">\"</span></span>&gt;&lt;/<span class=\"pl-ent\">script</span>&gt;</pre>\r\n\r\n<pre>&lt;<span class=\"pl-ent\">script</span> &gt;\r\n google.load('visualization', '1.0', {\r\n    'packages': ['corechart']\r\n  });\r\n  &lt;/<span class=\"pl-ent\">script</span>&gt;</pre>\r\n\r\n<h3>Step 2:Install ng2-googlechart into your project</h3>\r\n\r\n<pre>npm install ng2-googlechart --save</pre>\r\n\r\n<h3>Step 3:Add following code into angular.cli.build.json</h3>\r\n\r\n<pre>'ng2-googlechart/**/*.js'</pre>\r\n<p>\r\n<h3>Step 4:Add following code into system.config.ts file</h3>\r\n<pre>\r\nconst map: any = {\r\n  'ng2-googlechart':'vendor/ng2-googlechart'\r\n};\r\n\r\nconst packages: any = {\r\n  'ng2-googlechart':{\r\n    main:'ng2-googlechart/ng2-googlechart.js'\r\n  }\r\n}\r\n</pre>\r\n</p>\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
