@@ -13,6 +13,35 @@
 
 <pre>npm install ng2-googlechart --save</pre>
 
+<section>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Configure Module
+    </div>
+    <div class="panel-body">
+      <p>import {Ng2GoogleChartModule} from 'ng2-googlechart'; in <strong>app.module.ts</strong></p>
+      <p>@NgModule({
+              declarations: [
+                AppComponent
+              ],
+              imports: [
+                BrowserModule,
+                FormsModule,
+                routing,
+                HttpModule,
+                NgbModule.forRoot(),
+                Ng2GoogleChartModule
+              ],
+              providers: [],
+              bootstrap: [AppComponent]
+            })
+      export class AppModule { }</p>
+    </div>
+  </div>
+
+
+</section>
+
 <h3>Step 3:Add following code into angular.cli.build.json</h3>
 
 <pre>'ng2-googlechart/**/*.js'</pre>
@@ -31,4 +60,3 @@ const packages: any = {
 </pre>
 
 </p>
-
