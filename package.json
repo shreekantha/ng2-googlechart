@@ -1,10 +1,12 @@
 {
   "name": "ng2-googlechart",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Angular 2 Google Charts library",
   "main": "build/ng2-googlechart.js",
   "typings": "build/ng2-googlechart.d.ts",
-  "files": ["build"],
+  "files": [
+    "build"
+  ],
   "scripts": {
     "flow:lint": "tslint src/*.ts",
     "flow.install:typings": "typings install",
@@ -14,7 +16,7 @@
     "test": "karma start",
     "test:ci": "karma start --singleRun"
   },
-   "license": "MIT",
+  "license": "MIT",
   "devDependencies": {
     "@angular/compiler": "^2.0.0",
     "@angular/core": "^2.0.0",
@@ -39,5 +41,28 @@
   },
   "peerDependencies": {
     "@angular/core": "^2.0.0"
-  }
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shreekantha/ng2-googlechart.git"
+  },
+  "keywords": [
+    "angular2 charts",
+    "Charts",
+    "chart",
+    "charts",
+    "google chart",
+    "google charts",
+    "angular2 google charts",
+    "ng charts",
+    "ng2 charts",
+    "ng2 google charts",
+    "ng google charts"
+  ],
+  "author": "Shreekanth",
+  "bugs": {
+    "url": "https://github.com/shreekantha/ng2-googlechart/issues"
+  },
+  "homepage": "https://github.com/shreekantha/ng2-googlechart#readme"
 }
