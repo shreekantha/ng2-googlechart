@@ -1,0 +1,43 @@
+{
+  "name": "ng2-googlechart",
+  "version": "2.0.4",
+  "description": "Angular 2 Google Charts library",
+  "main": "build/ng2-googlechart.js",
+  "typings": "build/ng2-googlechart.d.ts",
+  "files": ["build"],
+  "scripts": {
+    "flow:lint": "tslint src/*.ts",
+    "flow.install:typings": "typings install",
+    "flow:compile": "rm -rf build && tsc",
+    "build": "npm run flow:lint && npm run flow.install:typings && npm run flow:compile",
+    "prepublish": "npm run build",
+    "test": "karma start",
+    "test:ci": "karma start --singleRun"
+  },
+   "license": "MIT",
+  "devDependencies": {
+    "@angular/compiler": "^2.0.0",
+    "@angular/core": "^2.0.0",
+    "@angular/platform-browser": "^2.0.0",
+    "@angular/platform-browser-dynamic": "^2.0.0",
+    "jasmine-core": "^2.4.1",
+    "karma": "^1.3.0",
+    "karma-jasmine": "^1.0.2",
+    "karma-phantomjs-launcher": "^1.0.2",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "1.7.0",
+    "reflect-metadata": "^0.1.3",
+    "rxjs": "5.0.0-beta.12",
+    "ts-helpers": "^1.1.1",
+    "ts-loader": "^0.8.2",
+    "tslint": "^3.15.1",
+    "typescript": "2.0.2",
+    "typings": "^1.3.3",
+    "webpack": "^1.12.14",
+    "webpack-dev-server": "^1.14.1",
+    "zone.js": "^0.6.23"
+  },
+  "peerDependencies": {
+    "@angular/core": "^2.0.0"
+  }
+}
