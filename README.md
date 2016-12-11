@@ -1,67 +1,32 @@
-# ng2-google-charts
+# ng2-googlechart
 
-> Google Charts module for Angular 2
+<h3>Step 1:Add the following code into your index.html</h3>
+<pre>&lt;<span class="pl-ent">script</span><span class="pl-e"> src</span>=<span class="pl-s"><span class="pl-pds">"</span>https://www.google.com/jsapi<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</pre>
 
-Please see [this page][example-page] for a live demo.
+<pre>&lt;<span class="pl-ent">script</span> &gt;
+ google.load('visualization', '1.0', {
+    'packages': ['corechart']
+  });
+  &lt;/<span class="pl-ent">script</span>&gt;</pre>
 
-[![NPM Version][npm-image]][npm-url]
-[![Downloads][npm-downloads-image]][npm-downloads-url]
+<h3>Step 2:Install ng2-googlechart into your project</h3>
 
-## Install
+<pre>npm install ng2-googlechart --save</pre>
 
-```bash
-npm i --save ng2-google-charts
-```
+<h3>Step 3:Add following code into angular.cli.build.json</h3>
 
-## Usage
-
-Add the following inside the `<head>` element in your `index.html`:
-```html
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-```
-
-Import the `Ng2GoogleChartsModule` in your `app.module.ts`:
-```ts
-import { Ng2GoogleChartsModule } from 'ng2-google-charts';
-
-@NgModule({
-  ...
-  imports: [
-    ...
-    Ng2GoogleChartsModule,
-  ],
-})
-export class AppModule { }
-```
-
-In your templates, use the `google-chart` component like this:
-```html
-<google-chart [data]="pieChartOptions"></google-chart>
-```
-and in the corresponding `.ts` file:
-```ts
-pieChartOptions =  {
-  chartType: 'PieChart',
-  dataTable: [
-    ['Task', 'Hours per Day'],
-    ['Work',     11],
-    ['Eat',      2],
-    ['Commute',  2],
-    ['Watch TV', 2],
-    ['Sleep',    7]
-  ],
-  options: {'title': 'Tasks'},
+<pre>'ng2-googlechart/**/*.js'</pre>
+<p>
+<h3>Step 4:Add following code into system.config.ts file</h3>
+<pre>
+const map: any = {
+  'ng2-googlechart':'vendor/ng2-googlechart'
 };
-```
 
-Please see [this page][example-page] for a demo with more examples.
-
-## License
-
-[MIT](LICENSE.md)
-
-[npm-image]: https://img.shields.io/npm/v/ng2-google-charts.svg
-[npm-url]: https://npmjs.org/package/ng2-google-charts
-[npm-downloads-image]: http://img.shields.io/npm/dm/ng2-google-charts.svg
-[npm-downloads-url]: https://npmjs.org/package/ng2-google-charts
-[example-page]: https://gmazzamuto.github.io/ng2-google-charts
+const packages: any = {
+  'ng2-googlechart':{
+    main:'ng2-googlechart/ng2-googlechart.js'
+  }
+}
+</pre>
+</p>
