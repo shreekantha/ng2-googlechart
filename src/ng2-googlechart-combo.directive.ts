@@ -73,8 +73,8 @@ export class ComboChartDirective implements OnInit {
             }
         }
         dataTable.addRows(tempData);
-        let chart = (new this.w.google.visualization.ColumnChart(this.el))
-            .draw(dataTable, this.options || {});
+        let chart = (new this.w.google.visualization.ColumnChart(this.el));
+        chart.draw(dataTable, this.options || {});
         this.w.google.visualization.events.addListener(chart, 'select', () => {
             var selectedData = chart.getSelection();
             var row, item;

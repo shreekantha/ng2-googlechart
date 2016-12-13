@@ -57,41 +57,42 @@ export class ChartDirective implements OnInit {
         let chart;
         switch (this.charttype) {
             case "Column":
-                chart = (new this.w.google.visualization.ColumnChart(this.el))
-                    .draw(dataTable, this.options || {});
+                chart = (new this.w.google.visualization.ColumnChart(this.el));
+
                 break;
             case "Bar":
-                chart = (new this.w.google.visualization.BarChart(this.el))
-                    .draw(dataTable, this.options || {});
+                chart = (new this.w.google.visualization.BarChart(this.el));
+
                 break;
             case "Pie":
-                chart = (new this.w.google.visualization.PieChart(this.el))
-                    .draw(dataTable, this.options || {});
+                chart = (new this.w.google.visualization.PieChart(this.el));
+
                 break;
             case "Donut":
                 this.options.pieHole = 0.5;
-                chart = (new this.w.google.visualization.PieChart(this.el))
-                    .draw(dataTable, this.options || {});
+                chart = (new this.w.google.visualization.PieChart(this.el));
+
                 break;
             case "Line":
-                chart = (new this.w.google.visualization.LineChart(this.el))
-                    .draw(dataTable, this.options || {});
+                chart = (new this.w.google.visualization.LineChart(this.el));
+
                 break;
             case "Area":
-                chart = (new this.w.google.visualization.AreaChart(this.el))
-                    .draw(dataTable, this.options || {});
+                chart = (new this.w.google.visualization.AreaChart(this.el));
+
                 break;
             case "Geo":
-                chart = (new this.w.google.visualization.GeoChart(this.el))
-                    .draw(dataTable, this.options || {});
+                chart = (new this.w.google.visualization.GeoChart(this.el));
+
                 break;
             case "Histogram":
-                chart = (new this.w.google.visualization.Histogram(this.el))
-                    .draw(dataTable, this.options || {});
+                chart = (new this.w.google.visualization.Histogram(this.el));
+
                 break;
             default:
                 break;
         }
+        chart.draw(dataTable, this.options || {});
         this.w.google.visualization.events.addListener(chart, 'select', () => {
 
             var selectedData = chart.getSelection();
