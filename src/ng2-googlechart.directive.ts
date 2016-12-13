@@ -2,7 +2,7 @@
 *      This directive will draw a chart from the array of records provided
 *
 **/
-import {Directive, ElementRef, Input, OnInit} from "@angular/core";
+import {Directive, ElementRef, Input, Output, EventEmitter, OnInit} from "@angular/core";
 
 @Directive({
     selector: "chart",
@@ -18,6 +18,7 @@ export class ChartDirective implements OnInit {
     @Input() isrole: boolean;
     @Input() roledata: any[];
     @Input() roles: any[];
+    @Output() select = new EventEmitter();
     constructor(elementRef: ElementRef) {
         this.w = window;
         this.el = elementRef.nativeElement; // You cannot use elementRef directly !
@@ -53,43 +54,56 @@ export class ChartDirective implements OnInit {
         }
     }
     private selectChartType(dataTable: any) {
+        let chart;
         switch (this.charttype) {
             case "Column":
-                (new this.w.google.visualization.ColumnChart(this.el))
+                chart = (new this.w.google.visualization.ColumnChart(this.el))
                     .draw(dataTable, this.options || {});
                 break;
             case "Bar":
-                (new this.w.google.visualization.BarChart(this.el))
+                chart = (new this.w.google.visualization.BarChart(this.el))
                     .draw(dataTable, this.options || {});
                 break;
             case "Pie":
-                (new this.w.google.visualization.PieChart(this.el))
+                chart = (new this.w.google.visualization.PieChart(this.el))
                     .draw(dataTable, this.options || {});
                 break;
             case "Donut":
                 this.options.pieHole = 0.5;
-                (new this.w.google.visualization.PieChart(this.el))
+                chart = (new this.w.google.visualization.PieChart(this.el))
                     .draw(dataTable, this.options || {});
                 break;
             case "Line":
-                (new this.w.google.visualization.LineChart(this.el))
+                chart = (new this.w.google.visualization.LineChart(this.el))
                     .draw(dataTable, this.options || {});
                 break;
             case "Area":
-                (new this.w.google.visualization.AreaChart(this.el))
+                chart = (new this.w.google.visualization.AreaChart(this.el))
                     .draw(dataTable, this.options || {});
                 break;
             case "Geo":
-                (new this.w.google.visualization.GeoChart(this.el))
+                chart = (new this.w.google.visualization.GeoChart(this.el))
                     .draw(dataTable, this.options || {});
                 break;
             case "Histogram":
-                (new this.w.google.visualization.Histogram(this.el))
+                chart = (new this.w.google.visualization.Histogram(this.el))
                     .draw(dataTable, this.options || {});
                 break;
             default:
                 break;
         }
+        this.w.google.visualization.events.addListener(chart, 'select', () => {
+
+            var selectedData = chart.getSelection();
+            var row, item;
+            if (selectedData[0]) {
+                row = selectedData[0].row;
+                item = dataTable.getValue(row, 0);
+                this.select.next(item);
+            }
+            return this.select.next;
+
+        });
 
     }
 }

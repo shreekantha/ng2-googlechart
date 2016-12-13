@@ -2,7 +2,7 @@
 * This directive will draw a combo chart from the array of records provided
 *
 **/
-import {Directive, ElementRef, Input, OnInit} from "@angular/core";
+import {Directive, ElementRef, Input, Output, EventEmitter, OnInit} from "@angular/core";
 
 @Directive({
     selector: "combo-chart",
@@ -17,6 +17,7 @@ export class ComboChartDirective implements OnInit {
     @Input() isrole: boolean;
     @Input() roledata: any[];
     @Input() roles: any[];
+    @Output() select = new EventEmitter();
     // Constructor inject a ref to the element
     constructor(elementRef: ElementRef) {
         this.w = window;
@@ -72,7 +73,17 @@ export class ComboChartDirective implements OnInit {
             }
         }
         dataTable.addRows(tempData);
-        (new this.w.google.visualization.ColumnChart(this.el))
+        let chart = (new this.w.google.visualization.ColumnChart(this.el))
             .draw(dataTable, this.options || {});
+        this.w.google.visualization.events.addListener(chart, 'select', () => {
+            var selectedData = chart.getSelection();
+            var row, item;
+            if (selectedData[0]) {
+                row = selectedData[0].row;
+                item = dataTable.getValue(row, 0);
+                this.select.next(item);
+            }
+            return this.select.next;
+        });
     }
 }
