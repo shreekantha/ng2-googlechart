@@ -11,12 +11,12 @@ export class ChartDirective implements OnInit {
     el: HTMLElement;
     w: any;  // To store the window, without generating errors in typescript on window.google
     @Input() data: any[];
-    @Input() rowlabels: any[];
-    @Input() columnlabels: any[];
+    @Input() labels: any[];
+    @Input() columnTypes: any[];
     @Input() options: any;
-    @Input() charttype: any;
-    @Input() isrole: boolean;
-    @Input() roledata: any[];
+    @Input() chartType: any;
+    @Input() isRole: boolean;
+    @Input() roleData: any[];
     @Input() roles: any[];
     @Output() select = new EventEmitter();
     constructor(elementRef: ElementRef) {
@@ -35,27 +35,27 @@ export class ChartDirective implements OnInit {
         this.selectChartType(dataTable);
     }
     private drawChart(dataTable: any, tempData: any) {
-        if (typeof this.columnlabels !== undefined && typeof this.rowlabels !== undefined && typeof this.data != undefined) {
-            for (let c of this.columnlabels) {
+        if (typeof this.columnTypes !== undefined && typeof this.labels !== undefined && typeof this.data != undefined) {
+            for (let c of this.columnTypes) {
                 dataTable.addColumn(c.type, c.value);
             }
-            if (this.isrole) {
+            if (this.isRole) {
                 for (let role of this.roles) {
                     dataTable.addColumn(role);
                 }
                 for (let index = 0; index < this.data.length; index++) {
-                    tempData.push([this.rowlabels[index], this.data[index], this.roledata[index]]);
+                    tempData.push([this.labels[index], this.data[index], this.roleData[index]]);
                 }
             } else {
                 for (let index = 0; index < this.data.length; index++) {
-                    tempData.push([this.rowlabels[index], this.data[index]]);
+                    tempData.push([this.labels[index], this.data[index]]);
                 }
             }
         }
     }
     private selectChartType(dataTable: any) {
         let chart;
-        switch (this.charttype) {
+        switch (this.chartType) {
             case "Column":
                 chart = (new this.w.google.visualization.ColumnChart(this.el));
 

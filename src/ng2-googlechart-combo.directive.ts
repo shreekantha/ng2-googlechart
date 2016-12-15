@@ -11,11 +11,12 @@ export class ComboChartDirective implements OnInit {
     el: HTMLElement;
     w: any;  // To store the window, without generating errors in typescript on window.google
     @Input() data: any[];
-    @Input() rowlabels: any[];
-    @Input() columnlabels: any[];
+    @Input() labels: any[];
+    @Input() columnTypes: any[];
     @Input() options: any;
-    @Input() isrole: boolean;
-    @Input() roledata: any[];
+    @Input() chartType: any;
+    @Input() isRole: boolean;
+    @Input() roleData: any[];
     @Input() roles: any[];
     @Output() select = new EventEmitter();
     // Constructor inject a ref to the element
@@ -33,36 +34,36 @@ export class ComboChartDirective implements OnInit {
         this.drawComboChart(dataTable, tempData);
     }
     private drawComboChart(dataTable: any, tempData: any) {
-        if (typeof this.columnlabels !== undefined && typeof this.rowlabels !== undefined && typeof this.data != undefined) {
-            if (this.isrole) {
-                for (let i = 0; i < this.columnlabels.length; i++) {
+        if (typeof this.columnTypes !== undefined && typeof this.labels !== undefined && typeof this.data != undefined) {
+            if (this.isRole) {
+                for (let i = 0; i < this.columnTypes.length; i++) {
                     if (i === 0) {
-                        dataTable.addColumn(this.columnlabels[i].type, this.columnlabels[i].value);
+                        dataTable.addColumn(this.columnTypes[i].type, this.columnTypes[i].value);
                     } else {
-                        dataTable.addColumn(this.columnlabels[i].type, this.columnlabels[i].value);
+                        dataTable.addColumn(this.columnTypes[i].type, this.columnTypes[i].value);
                         dataTable.addColumn(this.roles[i - 1]);
                     }
                 }
-                for (let i = 0; i < this.rowlabels.length; i++) {
+                for (let i = 0; i < this.labels.length; i++) {
                     let item: any[] = new Array();
-                    item.push(this.rowlabels[i]);
-                    for (let j = i; j < this.rowlabels.length; j++) {
+                    item.push(this.labels[i]);
+                    for (let j = i; j < this.labels.length; j++) {
                         for (let k = 0; k < this.data.length; k++) {
                             item.push(this.data[k][j]);
-                            item.push(this.roledata[k][j]);
+                            item.push(this.roleData[k][j]);
                         }
                         break;
                     }
                     tempData.push(item);
                 }
             } else {
-                for (let i = 0; i < this.columnlabels.length; i++) {
-                    dataTable.addColumn(this.columnlabels[i].type, this.columnlabels[i].value);
+                for (let i = 0; i < this.columnTypes.length; i++) {
+                    dataTable.addColumn(this.columnTypes[i].type, this.columnTypes[i].value);
                 }
-                for (let i = 0; i < this.rowlabels.length; i++) {
+                for (let i = 0; i < this.labels.length; i++) {
                     let item: any[] = new Array();
-                    item.push(this.rowlabels[i]);
-                    for (let j = i; j < this.rowlabels.length; j++) {
+                    item.push(this.labels[i]);
+                    for (let j = i; j < this.labels.length; j++) {
                         for (let k = 0; k < this.data.length; k++) {
                             item.push(this.data[k][j]);
                         }
