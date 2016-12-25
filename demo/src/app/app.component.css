@@ -9,3 +9,8 @@ body{
 .navbar-brand{
       color: #ffffff !important;
 }
+
+.chart{
+    width: 100%;
+    min-height: 400px;
+}

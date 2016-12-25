@@ -56,10 +56,10 @@
 
 <div class="container-fluid">
   <div class="jumbotron">
-    <h1>Angular 2 Google Chart Library</h1>      
+    <h1>Angular 2 Google Chart Library</h1>
     <p> Draw Simply...</p>
   </div>
-     
+
 </div>
 <div class="container-fluid">
 
@@ -126,32 +126,37 @@ Configure Module (app.module.ts)
               <a class="nav-link active" data-toggle="tab" href="#column" role="tab">Chart</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#columnhtml" role="tab">HTML</a>
+              <a class="nav-link" data-toggle="tab" href="#columnhtml" role="tab">app.component.html</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#columnts" role="tab">TypeScript</a>
+              <a class="nav-link" data-toggle="tab" href="#columnts" role="tab">app.component.ts</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#coloumncss" role="tab">app.component.css</a>
             </li>
           </ul>
           <!-- Tab panes -->
           <div class="tab-content">
             <div class="tab-pane active" id="column" role="tabpanel">
-              <chart [data]="data" [options]="options" [labels]="labels" [columnTypes]="columnTypes" [chartType]="'Column'"></chart>
+              <div chart class="chart" [data]="data" [options]="options" [labels]="labels" [columnTypes]="columnTypes" [chartType]="'Column'"></div>
             </div>
             <div class="tab-pane" id="columnhtml" role="tabpanel">
               <textarea rows="20" cols="50" style="width:100%">
-             //app.component.html
+             
             
-             <chart [data]="data" 
+             <div class="chart" 
+                    chart 
+                    [data]="data" 
                     [options]="options" 
                     [labels]="labels" 
                     [columnTypes]="columnTypes" 
                     [chartType]="chartType">
-             </chart>
+             </div>
          </textarea>
             </div>
             <div class="tab-pane" id="columnts" role="tabpanel">
               <textarea rows="20" cols="50" style="width:100%">
-            //app.component.ts
+            
             
             import { Component } from '@angular/core';
 
@@ -191,6 +196,14 @@ Configure Module (app.module.ts)
             }
             </textarea>
             </div>
+            <div class="tab-pane" id="coloumncss" role="tabpanel">
+              <textarea rows="20" cols="50" style="width:100%"> 
+                .chart{
+                    width: 100%;
+                    min-height: 400px;
+                }
+                </textarea>
+            </div>
           </div>
         </div>
       </div>
@@ -209,32 +222,37 @@ Configure Module (app.module.ts)
               <a class="nav-link active" data-toggle="tab" href="#Pie" role="tab">Pie</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#piehtml" role="tab">HTML</a>
+              <a class="nav-link" data-toggle="tab" href="#piehtml" role="tab">app.component.html</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#piets" role="tab">TypeScript</a>
+              <a class="nav-link" data-toggle="tab" href="#piets" role="tab">app.component.ts</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#piecss" role="tab">app.component.css</a>
             </li>
           </ul>
           <!-- Tab panes -->
           <div class="tab-content">
             <div class="tab-pane active" id="Pie" role="tabpanel">
-              <chart [data]="data" [options]="options" [labels]="labels" [columnTypes]="columnTypes" [chartType]="'Pie'"></chart>
+              <div chart class="chart" [data]="data" [options]="options" [labels]="labels" [columnTypes]="columnTypes" [chartType]="'Pie'"></div>
             </div>
             <div class="tab-pane" id="piehtml" role="tabpanel">
               <textarea rows="20" cols="50" style="width:100%">
-             //app.component.html
+             
             
-             <chart [data]="data" 
+             <div class="chart"
+                    chart  
+                    [data]="data" 
                     [options]="options" 
                     [labels]="labels" 
                     [columnTypes]="columnTypes" 
                     [chartType]="chartType">
-             </chart>
+             </div>
          </textarea>
             </div>
             <div class="tab-pane" id="piets" role="tabpanel">
               <textarea rows="20" cols="50" style="width:100%">
-           //app.component.ts
+           
             
             import { Component } from '@angular/core';
 
@@ -274,6 +292,14 @@ Configure Module (app.module.ts)
             }
             </textarea>
             </div>
+            <div class="tab-pane" id="piecss" role="tabpanel">
+              <textarea rows="20" cols="50" style="width:100%"> 
+                .chart{
+                    width: 100%;
+                    min-height: 400px;
+                }
+                </textarea>
+            </div>
           </div>
         </div>
       </div>
@@ -291,32 +317,37 @@ Configure Module (app.module.ts)
               <a class="nav-link active" data-toggle="tab" href="#Bar" role="tab">Bar</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#barhtml" role="tab">HTML</a>
+              <a class="nav-link" data-toggle="tab" href="#barhtml" role="tab">app.component.html</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#barts" role="tab">TypeScript</a>
+              <a class="nav-link" data-toggle="tab" href="#barts" role="tab">app.component.ts</a>
+            </li>
+             <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#barcss" role="tab">app.component.css</a>
             </li>
           </ul>
           <!-- Tab panes -->
           <div class="tab-content">
             <div class="tab-pane active" id="Bar" role="tabpanel">
-              <chart [data]="data" [options]="options" [labels]="labels" [columnTypes]="columnTypes" [chartType]="'Bar'"></chart>
+              <div chart class="chart" [data]="data" [options]="options" [labels]="labels" [columnTypes]="columnTypes" [chartType]="'Bar'"></div>
             </div>
             <div class="tab-pane" id="barhtml" role="tabpanel">
               <textarea rows="20" cols="50" style="width:100%"> 
-                //app.component.html
+                
             
-                <chart [data]="data" 
-                [options]="options" 
-                [labels]="labels" 
-                [columnTypes]="columnTypes" 
-                [chartType]="chartType">
-                </chart>
+                <div class="chart" 
+                      chart
+                      [data]="data" 
+                      [options]="options" 
+                      [labels]="labels" 
+                      [columnTypes]="columnTypes" 
+                      [chartType]="chartType">
+                </div>
                 </textarea>
             </div>
             <div class="tab-pane" id="barts" role="tabpanel">
               <textarea rows="20" cols="50" style="width:100%">
-            //app.component.ts
+            
                 
             import { Component } from '@angular/core';
 
@@ -356,7 +387,14 @@ Configure Module (app.module.ts)
             }
             </textarea>
             </div>
-
+<div class="tab-pane" id="barcss" role="tabpanel">
+              <textarea rows="20" cols="50" style="width:100%"> 
+                .chart{
+                    width: 100%;
+                    min-height: 400px;
+                }
+                </textarea>
+            </div>
           </div>
 
         </div>
@@ -374,32 +412,37 @@ Configure Module (app.module.ts)
               <a class="nav-link active" data-toggle="tab" href="#line" role="tab">Line Graph</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#linehtml" role="tab">HTML</a>
+              <a class="nav-link" data-toggle="tab" href="#linehtml" role="tab">app.component.html</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#linets" role="tab">TypeScript</a>
+              <a class="nav-link" data-toggle="tab" href="#linets" role="tab">app.component.ts</a>
+            </li>
+             <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#linecss" role="tab">app.component.css</a>
             </li>
           </ul>
           <!-- Tab panes -->
           <div class="tab-content">
             <div class="tab-pane active" id="line" role="tabpanel">
-              <chart [data]="data" [options]="options" [labels]="labels" [columnTypes]="columnTypes" [chartType]="'Line'"></chart>
+              <div chart class="chart" [data]="data" [options]="options" [labels]="labels" [columnTypes]="columnTypes" [chartType]="'Line'"></div>
             </div>
             <div class="tab-pane" id="linehtml" role="tabpanel">
               <textarea rows="20" cols="50" style="width:100%"> 
-                //app.component.html
+                
             
-                <chart [data]="data" 
-                [options]="options" 
-                [labels]="labels" 
-                [columnTypes]="columnTypes" 
-                [chartType]="chartType">
-                </chart>
+                <div class="chart" 
+                      chart
+                      [data]="data" 
+                      [options]="options" 
+                      [labels]="labels" 
+                      [columnTypes]="columnTypes" 
+                      [chartType]="chartType">
+                </div>
                 </textarea>
             </div>
             <div class="tab-pane" id="linets" role="tabpanel">
               <textarea rows="20" cols="50" style="width:100%">
-            //app.component.ts
+            
                 
             import { Component } from '@angular/core';
 
@@ -439,14 +482,141 @@ Configure Module (app.module.ts)
             }
             </textarea>
             </div>
-
+            <div class="tab-pane" id="linecss" role="tabpanel">
+              <textarea rows="20" cols="50" style="width:100%"> 
+                .chart{
+                    width: 100%;
+                    min-height: 450px;
+                }
+                </textarea>
+            </div>
           </div>
 
         </div>
       </div>
     </div>
   </div>
+  <div class="row">
 
+    <div class="col-md-12">
+
+
+      <div class="panel panel-primary">
+        <div class="panel-heading">Combo Chart</div>
+        <div class="panel-body">
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#combo" role="tab">Chart</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#combohtml" role="tab">app.component.html</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#combots" role="tab">app.component.ts</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#combocss" role="tab">app.component.css</a>
+            </li>
+          </ul>
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div class="tab-pane active" id="combo" role="tabpanel">
+              <div class="chart" combo-chart [data]="data1" [options]="options1" [labels]="rowlabels" [columnTypes]="columnlabels">
+              </div>
+            </div>
+            <div class="tab-pane" id="combohtml" role="tabpanel">
+              <textarea rows="20" cols="50" style="width:100%"> 
+                
+            
+                <div class="chart" 
+                 combo-chart
+                 [data]="data" 
+                 [options]="options" 
+                 [labels]="labels" 
+                 [columnTypes]="labels">
+                 </div>
+                </textarea>
+            </div>
+
+            <div class="tab-pane" id="combots" role="tabpanel">
+              <textarea rows="20" cols="50" style="width:100%">
+            
+                
+            import { Component } from '@angular/core';
+
+            @Component({
+              selector: 'app-root',
+              templateUrl: './app.component.html',
+              styleUrls: ['./app.component.css']
+            })
+            export class AppComponent {
+
+              rowlabels = ['DS','EC','LD','CPP'];
+              data = [[10,15,20,30], [70,80,65,90]];
+       
+
+              columnTypes = [{
+                    'type': 'string',
+                    'value': 'subjectName'
+                },
+                {
+                    'type': 'number',
+                    'value': 'Internal Score'
+                }, {
+                    'type': 'number',
+                    'value': 'External Score'
+                }];
+
+              options = {
+
+                
+                  'vAxis': {
+                      'title': ' Scores',
+                      'ticks': [0, 25, 50, 75, 100, 125, 150]
+                  },
+                  backgroundColor:'transparent',
+                  'hAxis': {
+                      'title': 'Courses',
+                      'slantedText': 'true',
+                      'slantedTextAngle': 45
+                  },
+                  'legend': {
+                      'position': 'top',
+                      'alignment': 'end'
+                  },
+                  'colors': ['#d4ae5d', '#8aa8a1'],
+                  'isStacked': true,
+                  seriesType: 'bars',
+                 
+                  'bar': {
+                      'groupWidth': '40%'
+                  },
+                  lineWidth: 0,
+                  animation: {
+                      startup: true,
+                      duration: 500,
+                      easing: 'out',
+                  }
+
+              };
+            }
+            </textarea>
+            </div>
+            <div class="tab-pane" id="combocss" role="tabpanel">
+              <textarea rows="20" cols="50" style="width:100%"> 
+                .chart{
+                    width: 100%;
+                    min-height: 400px;
+                }
+                </textarea>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
 
 
 </div>

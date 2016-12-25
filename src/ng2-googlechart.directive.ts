@@ -5,7 +5,8 @@
 import {Directive, ElementRef, Input, Output, EventEmitter, OnInit} from "@angular/core";
 
 @Directive({
-    selector: "chart",
+    selector: "div[chart]",
+    exportAs: 'chart'
 })
 export class ChartDirective implements OnInit {
     el: HTMLElement;

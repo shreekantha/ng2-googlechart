@@ -5,7 +5,8 @@
 import {Directive, ElementRef, Input, Output, EventEmitter, OnInit} from "@angular/core";
 
 @Directive({
-    selector: "combo-chart",
+    selector: "div[combo-chart]",
+    exportAs: 'combo-chart'
 })
 export class ComboChartDirective implements OnInit {
     el: HTMLElement;
