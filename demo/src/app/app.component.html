@@ -56,8 +56,8 @@
 
 <div class="container-fluid">
   <div class="jumbotron">
-    <h1>ng2-googlechart</h1>      
-    <p> <strong>ng2-googlechart</strong> is the Angular 2 Google Chart Library.Which helps developer to draw charts in angular 2 with  minimum number of steps</p>
+    <h1>Angular 2 Google Chart Library</h1>      
+    <p> Draw Simply...</p>
   </div>
      
 </div>
@@ -139,6 +139,8 @@ Configure Module (app.module.ts)
             </div>
             <div class="tab-pane" id="columnhtml" role="tabpanel">
               <textarea rows="20" cols="50" style="width:100%">
+             //app.component.html
+            
              <chart [data]="data" 
                     [options]="options" 
                     [labels]="labels" 
@@ -149,6 +151,8 @@ Configure Module (app.module.ts)
             </div>
             <div class="tab-pane" id="columnts" role="tabpanel">
               <textarea rows="20" cols="50" style="width:100%">
+            //app.component.ts
+            
             import { Component } from '@angular/core';
 
             @Component({
@@ -218,6 +222,8 @@ Configure Module (app.module.ts)
             </div>
             <div class="tab-pane" id="piehtml" role="tabpanel">
               <textarea rows="20" cols="50" style="width:100%">
+             //app.component.html
+            
              <chart [data]="data" 
                     [options]="options" 
                     [labels]="labels" 
@@ -228,6 +234,8 @@ Configure Module (app.module.ts)
             </div>
             <div class="tab-pane" id="piets" role="tabpanel">
               <textarea rows="20" cols="50" style="width:100%">
+           //app.component.ts
+            
             import { Component } from '@angular/core';
 
             @Component({
@@ -296,10 +304,20 @@ Configure Module (app.module.ts)
             </div>
             <div class="tab-pane" id="barhtml" role="tabpanel">
               <textarea rows="20" cols="50" style="width:100%"> 
-                <chart [data]="data" [options]="options" [labels]="labels" [columnTypes]="columnTypes" [chartType]="chartType"></chart></textarea>
+                //app.component.html
+            
+                <chart [data]="data" 
+                [options]="options" 
+                [labels]="labels" 
+                [columnTypes]="columnTypes" 
+                [chartType]="chartType">
+                </chart>
+                </textarea>
             </div>
             <div class="tab-pane" id="barts" role="tabpanel">
               <textarea rows="20" cols="50" style="width:100%">
+            //app.component.ts
+                
             import { Component } from '@angular/core';
 
             @Component({
@@ -369,10 +387,20 @@ Configure Module (app.module.ts)
             </div>
             <div class="tab-pane" id="linehtml" role="tabpanel">
               <textarea rows="20" cols="50" style="width:100%"> 
-                <chart [data]="data" [options]="options" [labels]="labels" [columnTypes]="columnTypes" [chartType]="chartType"></chart></textarea>
+                //app.component.html
+            
+                <chart [data]="data" 
+                [options]="options" 
+                [labels]="labels" 
+                [columnTypes]="columnTypes" 
+                [chartType]="chartType">
+                </chart>
+                </textarea>
             </div>
             <div class="tab-pane" id="linets" role="tabpanel">
               <textarea rows="20" cols="50" style="width:100%">
+            //app.component.ts
+                
             import { Component } from '@angular/core';
 
             @Component({
