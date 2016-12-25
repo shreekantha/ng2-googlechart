@@ -1,6 +1,7 @@
 example/
 typings/
 build/
+demo/
 karma*
 tsconfig.json
 tslint.json
