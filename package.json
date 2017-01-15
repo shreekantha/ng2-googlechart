@@ -1,11 +1,11 @@
 {
   "name": "ng2-googlechart",
-  "version": "2.0.10",
+  "version": "2.0.11",
   "description": "Angular 2 Google Charts library",
   "main": "index.js",
   "typings": "index.d.ts",
-   "scripts": {
-   "prebuild": "rimraf build",
+  "scripts": {
+    "prebuild": "rimraf build",
     "build": "ngc -p src",
     "start": "http-server -c-1 -o -p 8875 .",
     "pretest": "npm run build",
