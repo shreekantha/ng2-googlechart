@@ -19,7 +19,9 @@ export class ComboChartDirective implements OnInit {
     @Input() isRole: boolean;
     @Input() roleData: any[];
     @Input() roles: any[];
+   @Input() columnSelection: boolean;
     @Output() select = new EventEmitter();
+    @Output() selectchart = new EventEmitter();
     // Constructor inject a ref to the element
     constructor(elementRef: ElementRef) {
         this.w = window;
@@ -78,14 +80,30 @@ export class ComboChartDirective implements OnInit {
         let chart = (new this.w.google.visualization.ColumnChart(this.el));
         chart.draw(dataTable, this.options || {});
         this.w.google.visualization.events.addListener(chart, 'select', () => {
-            var selectedData = chart.getSelection();
-            var row, item;
+             var selectedData = chart.getSelection();
+            var row;
+            var item = new EventData();
             if (selectedData[0]) {
-                row = selectedData[0].row;
-                item = dataTable.getValue(row, 0);
-                this.select.next(item);
+                if (this.columnSelection) {
+                    let column = selectedData[0].column;
+                    var item1 = dataTable.getColumnLabel(column);
+                    row = selectedData[0].row;
+                    var item2 = dataTable.getValue(row, 0);
+                    item.row = item2;
+                    item.column = item1;
+                    this.selectchart.next(item);
+                    return this.selectchart.next;
+                } else {
+                    row = selectedData[0].row;
+                    var rowitem = dataTable.getValue(row, 0);
+                    this.select.next(rowitem);
+                    return this.select.next;
+                }
             }
-            return this.select.next;
         });
     }
+}
+export class EventData {
+    row: any;
+    column: any;
 }
