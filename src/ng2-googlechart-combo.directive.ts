@@ -78,7 +78,7 @@ export class ComboChartDirective implements OnInit {
                     tempData.push(item);
                 }
             }
-        }comboChartData
+        }
         dataTable.addRows(tempData);
         let chart = (new this.w.google.visualization.ColumnChart(this.el));
         chart.draw(dataTable, this.options || {});
