@@ -30,6 +30,9 @@ export class ComboChartDirective implements OnInit {
     }
     ngOnInit() {
         this.comboChartData();
+          this.w.onresize = ()=>{
+          this.comboChartData();
+        }
     }
     private comboChartData() {
         let dataTable = new this.w.google.visualization.DataTable();
@@ -75,7 +78,7 @@ export class ComboChartDirective implements OnInit {
                     tempData.push(item);
                 }
             }
-        }
+        }comboChartData
         dataTable.addRows(tempData);
         let chart = (new this.w.google.visualization.ColumnChart(this.el));
         chart.draw(dataTable, this.options || {});

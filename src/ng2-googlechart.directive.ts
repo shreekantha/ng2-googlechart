@@ -27,6 +27,9 @@ export class ChartDirective implements OnInit {
     }
     ngOnInit() {
         this.prepareDataTable();
+          this.w.onresize = ()=>{
+          this.prepareDataTable();
+        }
     }
     private prepareDataTable(): any {
         let dataTable = new this.w.google.visualization.DataTable();
