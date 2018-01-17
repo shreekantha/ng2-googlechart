@@ -1,6 +1,6 @@
 {
   "name": "ng2-googlechart",
-  "version": "2.6.0",
+  "version": "2.7.0",
   "description": "Angular 2 Google Charts library",
   "main": "index.js",
   "typings": "index.d.ts",
