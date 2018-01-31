@@ -3,7 +3,9 @@
 *
 **/
 import {Directive, ElementRef, Input, Output, EventEmitter, OnInit} from "@angular/core";
-
+import { ChartService } from './ng2-googlechart.service';
+import { Observable } from 'rxjs/Observable';
+var chartLoaded;
 @Directive({
     selector: "div[combo-chart]",
     exportAs: 'combo-chart'
@@ -22,17 +24,41 @@ export class ComboChartDirective implements OnInit {
    @Input() columnSelection: boolean;
     @Output() select = new EventEmitter();
     @Output() selectchart = new EventEmitter();
+     @Output() onmouseover = new EventEmitter();
+    @Output() onmouseout = new EventEmitter();
     // Constructor inject a ref to the element
-    constructor(elementRef: ElementRef) {
+    constructor(elementRef: ElementRef, private chartDivService: ChartService) {
         this.w = window;
         this.el = elementRef.nativeElement; // You cannot use elementRef directly !
-        if (!this.w.google) { console.error("Hey ! It seems the needed google script was not loaded ?"); };
+        // if (!this.w.google) { console.error("Hey ! It seems the needed google script was not loaded ?"); };
     }
     ngOnInit() {
+        this.loadChartPackages().subscribe(loaded => {
         this.comboChartData();
           this.w.onresize = ()=>{
           this.comboChartData();
         }
+        },error=>{
+            console.error('Error in loading Google chart packages');
+        });
+    }
+    /**
+     * loadChart() method is called to load google chart packages 
+     */
+    private loadChartPackages(): Observable<any> {
+        return Observable.create(observer => {
+            this.w = window;
+            if (!chartLoaded) {
+                chartLoaded = true;
+                this.w.onload = () => {
+                    this.w.google.charts.load('current', { packages: ['corechart'] });
+                }
+            }
+            setTimeout(() => {
+                observer.next();
+                observer.complete();
+            }, 1000);
+        });
     }
     private comboChartData() {
         let dataTable = new this.w.google.visualization.DataTable();
@@ -102,6 +128,23 @@ export class ComboChartDirective implements OnInit {
                     this.select.next(rowitem);
                     return this.select.next;
                 }
+            }
+        });
+        this.w.google.visualization.events.addListener(chart, 'onmouseover', (e) => {
+            if (e.row != null) {
+                var item = new EventData();
+                item.row = e.row;
+                item.column = dataTable.getValue(e.row, 0);;
+                this.onmouseover.next(item);
+            }
+
+        });
+        this.w.google.visualization.events.addListener(chart, 'onmouseout', (e) => {
+            if (e.row != null) {
+                var item = new EventData();
+                item.row = e.row;
+                item.column = dataTable.getValue(e.row, 0);;
+                this.onmouseout.next(item);
             }
         });
     }
