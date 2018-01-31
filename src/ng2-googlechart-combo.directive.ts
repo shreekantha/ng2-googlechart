@@ -2,8 +2,8 @@
 * This directive will draw a combo chart from the array of records provided
 *
 **/
-import {Directive, ElementRef, Input, Output, EventEmitter, OnInit} from "@angular/core";
-import { ChartService } from './ng2-googlechart.service';
+import { Directive, ElementRef, Input, Output, EventEmitter, OnInit } from "@angular/core";
+import { ChartLoaderService } from './ng2-googlechart.service';
 import { Observable } from 'rxjs/Observable';
 var chartLoaded;
 @Directive({
@@ -21,29 +21,28 @@ export class ComboChartDirective implements OnInit {
     @Input() isRole: boolean;
     @Input() roleData: any[];
     @Input() roles: any[];
-   @Input() columnSelection: boolean;
+    @Input() columnSelection: boolean;
     @Output() select = new EventEmitter();
     @Output() selectchart = new EventEmitter();
-     @Output() onmouseover = new EventEmitter();
+    @Output() onmouseover = new EventEmitter();
     @Output() onmouseout = new EventEmitter();
     // Constructor inject a ref to the element
-    constructor(elementRef: ElementRef, private chartDivService: ChartService) {
+    constructor(elementRef: ElementRef, private chartLoaderService: ChartLoaderService) {
         this.w = window;
         this.el = elementRef.nativeElement; // You cannot use elementRef directly !
-        // if (!this.w.google) { console.error("Hey ! It seems the needed google script was not loaded ?"); };
     }
     ngOnInit() {
         this.loadChartPackages().subscribe(loaded => {
-        this.comboChartData();
-          this.w.onresize = ()=>{
-          this.comboChartData();
-        }
-        },error=>{
+            this.comboChartData();
+            this.w.onresize = () => {
+                this.comboChartData();
+            };
+        }, error => {
             console.error('Error in loading Google chart packages');
         });
     }
     /**
-     * loadChart() method is called to load google chart packages 
+     * loadChart() method is called to load google chart packages
      */
     private loadChartPackages(): Observable<any> {
         return Observable.create(observer => {
@@ -52,7 +51,7 @@ export class ComboChartDirective implements OnInit {
                 chartLoaded = true;
                 this.w.onload = () => {
                     this.w.google.charts.load('current', { packages: ['corechart'] });
-                }
+                };
             }
             setTimeout(() => {
                 observer.next();
@@ -109,7 +108,7 @@ export class ComboChartDirective implements OnInit {
         let chart = (new this.w.google.visualization.ColumnChart(this.el));
         chart.draw(dataTable, this.options || {});
         this.w.google.visualization.events.addListener(chart, 'select', () => {
-             var selectedData = chart.getSelection();
+            var selectedData = chart.getSelection();
             var row;
             var item = new EventData();
             if (selectedData[0]) {
@@ -134,7 +133,7 @@ export class ComboChartDirective implements OnInit {
             if (e.row != null) {
                 var item = new EventData();
                 item.row = e.row;
-                item.column = dataTable.getValue(e.row, 0);;
+                item.column = dataTable.getValue(e.row, 0);
                 this.onmouseover.next(item);
             }
 
@@ -143,7 +142,7 @@ export class ComboChartDirective implements OnInit {
             if (e.row != null) {
                 var item = new EventData();
                 item.row = e.row;
-                item.column = dataTable.getValue(e.row, 0);;
+                item.column = dataTable.getValue(e.row, 0);
                 this.onmouseout.next(item);
             }
         });

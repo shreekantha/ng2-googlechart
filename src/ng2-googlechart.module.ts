@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { ChartDirective } from "./ng2-googlechart.directive";
 import { ComboChartDirective } from "./ng2-googlechart-combo.directive";
-import { ChartWrapperDirective } from "./ng2-googlechart-wrapper.directive";
+import { GoogleChartDirective } from "./ng2-googlechart-wrapper.directive";
 
-import {ChartService} from './ng2-googlechart.service';
+import { ChartLoaderService } from './ng2-googlechart.service';
 @NgModule({
-    declarations: [
-      ChartDirective,
-      ComboChartDirective,ChartWrapperDirective
-    ],providers:[ChartService],
-    exports: [
-      ChartDirective,
-      ComboChartDirective,ChartWrapperDirective
-    ]
+  declarations: [
+    ChartDirective,
+    ComboChartDirective, GoogleChartDirective
+  ], providers: [ChartLoaderService],
+  exports: [
+    ChartDirective,
+    ComboChartDirective, GoogleChartDirective
+  ]
 })
 export class Ng2GoogleChartModule {
 }

@@ -1,21 +1,20 @@
-import { Observable } from 'rxjs/Observable';
 import { Injectable } from "@angular/core";
 /**
  * <tt>ChartDivService </tt> service is injected to load loader js file
  */
 @Injectable()
-export class ChartService {
+export class ChartLoaderService {
+    w: any;
     private googleScriptIsLoading: boolean;
-     w: any;
     constructor() {
         this.googleScriptIsLoading = false;
-         this.w = window;
-        if(!this.w.google){
-        this.loadLoader();
+        this.w = window;
+        if (!this.w.google) {
+            this.loadLoader();
         }
     }
     /**
-     * 
+     * loadLoader() method is called to load loader js file to window
      */
     private loadLoader() {
         if (!this.googleScriptIsLoading) {
