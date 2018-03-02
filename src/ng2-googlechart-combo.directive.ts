@@ -3,8 +3,9 @@
 *
 **/
 import { Directive, ElementRef, Input, Output, EventEmitter, OnInit } from "@angular/core";
-import { ChartLoaderService } from './ng2-googlechart.service';
 import { Observable } from 'rxjs/Observable';
+import {ChartLoaderService} from './ng2-googlechart.service';
+
 var chartLoaded;
 @Directive({
     selector: "div[combo-chart]",
@@ -12,7 +13,8 @@ var chartLoaded;
 })
 export class ComboChartDirective implements OnInit {
     el: HTMLElement;
-    w: any;  // To store the window, without generating errors in typescript on window.google
+    w: any;
+    // To store the window, without generating errors in typescript on window.google
     @Input() data: any[];
     @Input() labels: any[];
     @Input() columnTypes: any[];
@@ -27,11 +29,13 @@ export class ComboChartDirective implements OnInit {
     @Output() onmouseover = new EventEmitter();
     @Output() onmouseout = new EventEmitter();
     // Constructor inject a ref to the element
-    constructor(elementRef: ElementRef, private chartLoaderService: ChartLoaderService) {
+    constructor(elementRef: ElementRef,private chartLoaderServ:ChartLoaderService) {
         this.w = window;
         this.el = elementRef.nativeElement; // You cannot use elementRef directly !
+        
     }
     ngOnInit() {
+       this.chartLoaderServ.loadLoader().subscribe(googlecha=>{
         this.loadChartPackages().subscribe(loaded => {
             this.comboChartData();
             this.w.onresize = () => {
@@ -40,6 +44,10 @@ export class ComboChartDirective implements OnInit {
         }, error => {
             console.error('Error in loading Google chart packages');
         });
+        },error=>{
+         console.error("Error in loading Visualisation packages");
+
+        });
     }
     /**
      * loadChart() method is called to load google chart packages
@@ -47,16 +55,18 @@ export class ComboChartDirective implements OnInit {
     private loadChartPackages(): Observable<any> {
         return Observable.create(observer => {
             this.w = window;
-            if (!chartLoaded) {
-                chartLoaded = true;
-                this.w.onload = () => {
+            if (!this.w.google.visualization) {
+                if (!chartLoaded) {
+                    chartLoaded = true;
                     this.w.google.charts.load('current', { packages: ['corechart'] });
-                };
-            }
-            setTimeout(() => {
+                } setTimeout(function () {
+                    observer.next();
+                    observer.complete();
+                }, 1000);
+            } else {
                 observer.next();
                 observer.complete();
-            }, 1000);
+            }
         });
     }
     private comboChartData() {
@@ -132,8 +142,8 @@ export class ComboChartDirective implements OnInit {
         this.w.google.visualization.events.addListener(chart, 'onmouseover', (e) => {
             if (e.row != null) {
                 var item = new EventData();
-                item.row = e.row;
-                item.column = dataTable.getValue(e.row, 0);
+                item.row = dataTable.getValue(e.row, 0);
+                item.column =    dataTable.getColumnLabel(e.column);
                 this.onmouseover.next(item);
             }
 
@@ -141,8 +151,8 @@ export class ComboChartDirective implements OnInit {
         this.w.google.visualization.events.addListener(chart, 'onmouseout', (e) => {
             if (e.row != null) {
                 var item = new EventData();
-                item.row = e.row;
-                item.column = dataTable.getValue(e.row, 0);
+                item.row = dataTable.getValue(e.row, 0);
+                item.column =   dataTable.getColumnLabel(e.column);
                 this.onmouseout.next(item);
             }
         });

@@ -3,8 +3,8 @@
 *
 **/
 import { Directive, ElementRef, Input, Output, EventEmitter, OnInit } from "@angular/core";
-import { ChartLoaderService } from './ng2-googlechart.service';
 import { Observable } from 'rxjs/Observable';
+import {ChartLoaderService} from './ng2-googlechart.service';
 var chartLoaded;
 @Directive({
     selector: "div[chart]",
@@ -12,7 +12,8 @@ var chartLoaded;
 })
 export class ChartDirective implements OnInit {
     el: HTMLElement;
-    w: any;  // To store the window, without generating errors in typescript on window.google
+    w: any;  
+  // To store the window, without generating errors in typescript on window.google
     @Input() data: any[];
     @Input() labels: any[];
     @Input() columnTypes: any[];
@@ -24,11 +25,14 @@ export class ChartDirective implements OnInit {
     @Output() select = new EventEmitter();
     @Output() onmouseover = new EventEmitter();
     @Output() onmouseout = new EventEmitter();
-    constructor(elementRef: ElementRef, private chartLoaderService: ChartLoaderService) {
+    constructor(elementRef: ElementRef,private chartLoaderService:ChartLoaderService) {
         this.w = window;
         this.el = elementRef.nativeElement; // You cannot use elementRef directly !
+       
+        
     }
     ngOnInit() {
+         this.chartLoaderService.loadLoader().subscribe(googlecha=>{
         this.loadChartPackages().subscribe(loaded => {
             this.prepareDataTable();
             this.w.onresize = () => {
@@ -37,6 +41,11 @@ export class ChartDirective implements OnInit {
         }, error => {
             console.error('Error in loading Google chart packages');
         });
+        },error=>{
+         console.error("Error in loading Visualisation packages");
+
+        }); 
+      
     }
     /**
     * loadChart() method is called to load google chart packages
@@ -44,16 +53,18 @@ export class ChartDirective implements OnInit {
     private loadChartPackages(): Observable<any> {
         return Observable.create(observer => {
             this.w = window;
-            if (!chartLoaded) {
-                chartLoaded = true;
-                this.w.onload = () => {
+            if (!this.w.google.visualization) {
+                if (!chartLoaded) {
+                    chartLoaded = true;
                     this.w.google.charts.load('current', { packages: ['corechart'] });
-                };
-            }
-            setTimeout(() => {
+                } setTimeout(function () {
+                    observer.next();
+                    observer.complete();
+                }, 1000);
+            } else {
                 observer.next();
                 observer.complete();
-            }, 1000);
+            }
         });
     }
     private prepareDataTable(): any {
@@ -132,22 +143,29 @@ export class ChartDirective implements OnInit {
                 this.select.next(item);
             }
             return this.select.next;
-
         });
         this.w.google.visualization.events.addListener(chart, 'onmouseover', (e) => {
             if (e.row != null) {
-                var item = new EventData();
-                item.row = e.row;
-                item.column = dataTable.getValue(e.row, 0);
+                 var item = new EventData();
+                 if(e.column!=null)
+                item.row = dataTable.getValue(e.row, e.column);
+                else
+                item.row=null;
+
+                item.column =  dataTable.getValue(e.row,0);
                 this.onmouseover.next(item);
             }
 
         });
         this.w.google.visualization.events.addListener(chart, 'onmouseout', (e) => {
             if (e.row != null) {
-                var item = new EventData();
-                item.row = e.row;
-                item.column = dataTable.getValue(e.row, 0);
+                  var item = new EventData();
+                 if(e.column!=null)
+                item.row = dataTable.getValue(e.row, e.column);
+                else
+                item.row=null;
+
+                item.column =  dataTable.getValue(e.row,0);
                 this.onmouseout.next(item);
             }
         });
