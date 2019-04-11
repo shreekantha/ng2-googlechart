@@ -22,7 +22,9 @@ export class ChartDirective implements OnInit {
     @Input() isRole: boolean;
     @Input() roleData: any[];
     @Input() roles: any[];
+    @Input() columnSelection: boolean;
     @Output() select = new EventEmitter();
+    @Output() selectchart = new EventEmitter();
     @Output() onmouseover = new EventEmitter();
     @Output() onmouseout = new EventEmitter();
     constructor(elementRef: ElementRef,private chartLoaderService:ChartLoaderService) {
@@ -133,42 +135,38 @@ export class ChartDirective implements OnInit {
                 break;
         }
         chart.draw(dataTable, this.options || {});
+       
         this.w.google.visualization.events.addListener(chart, 'select', () => {
-
             var selectedData = chart.getSelection();
-            var row, item;
+            var row;
+            var item = new EventData();
             if (selectedData[0]) {
-                row = selectedData[0].row;
-                item = dataTable.getValue(row, 0);
-                this.select.next(item);
-            }
-            return this.select.next;
-        });
-        this.w.google.visualization.events.addListener(chart, 'onmouseover', (e) => {
-            if (e.row != null) {
-                 var item = new EventData();
-                 if(e.column!=null)
-                item.row = dataTable.getValue(e.row, e.column);
-                else
-                item.row=null;
-
-                item.column =  dataTable.getValue(e.row,0);
-                this.onmouseover.next(item);
-            }
-
-        });
-        this.w.google.visualization.events.addListener(chart, 'onmouseout', (e) => {
-            if (e.row != null) {
-                  var item = new EventData();
-                 if(e.column!=null)
-                item.row = dataTable.getValue(e.row, e.column);
-                else
-                item.row=null;
-
-                item.column =  dataTable.getValue(e.row,0);
-                this.onmouseout.next(item);
+                if (this.columnSelection) {
+                    let column = selectedData[0].column;
+                    row = selectedData[0].row;
+                    var item1 = dataTable.getValue(row,column);
+                    var item2 = dataTable.getValue(row, 0);
+                    item.row = item2;
+                    item.column = item1;
+                    this.selectchart.next(item);
+                    return this.selectchart.next;
+                } else {
+                    row = selectedData[0].row;
+                    var rowitem = dataTable.getValue(row, 0);
+                    this.select.next(rowitem);
+                    return this.select.next;
+                }
             }
         });
+        
+
+        this.w.google.visualization.events.addListener(chart, 'onmouseover', ()=> {
+            this.el.style.cursor='pointer';
+          });
+          this.w.google.visualization.events.addListener(chart, 'onmouseout', ()=>  {
+              this.el.style.cursor='default';
+  
+          });
 
     }
 }

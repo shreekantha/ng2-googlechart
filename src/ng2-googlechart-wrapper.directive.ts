@@ -19,12 +19,14 @@ export class GoogleChartDirective implements OnInit {
     @Output() select = new EventEmitter();
     @Output() onmouseover = new EventEmitter();
     @Output() onmouseout = new EventEmitter();
+    @Input() chartid:string;
     constructor(private elementRef: ElementRef, private chartLoaderService: ChartLoaderService) {
         this.el = this.elementRef.nativeElement; // You cannot use elementRef directly !
     }
     ngOnInit() {
          this.chartLoaderService.loadLoader().subscribe(googlecha=>{
         this.loadChart().subscribe(loaded => {
+            
              this.drawWrapperChart(this.chartType, this.options, this.data, this.el);
             this.w.onresize = () => {
                 this.drawWrapperChart(this.chartType, this.options, this.data, this.el);
@@ -71,8 +73,8 @@ export class GoogleChartDirective implements OnInit {
             if (selectedData[0]) {
                 var column = selectedData[0].column;
                 let selectedDataTable=wrapper.getDataTable();
-                var item1 = selectedDataTable.getColumnLabel(column);
                 row = selectedData[0].row;
+                var item1 = selectedDataTable.getValue(row, 0);
                 var item2 = selectedDataTable.getValue(row, column);
                 item.row = item2;
                 item.column = item1;
@@ -80,24 +82,12 @@ export class GoogleChartDirective implements OnInit {
                 return this.select.next;
             }
         });
-        this.w.google.visualization.events.addListener(wrapper.getChart(), 'onmouseover', (e) => {
-            if (e.row != null) {
-              let selectedDataTable=wrapper.getDataTable();
-                var item = new EventData();
-                item.row = selectedDataTable.getValue(e.row,e.column);
-                item.column = selectedDataTable.getColumnLabel(e.column);
-                this.onmouseover.next(item);
-            }
-
+        this.w.google.visualization.events.addListener(wrapper.getChart(), 'onmouseover', ()=> {
+          this.el.style.cursor='pointer';
         });
-        this.w.google.visualization.events.addListener(wrapper.getChart(), 'onmouseout', (e) => {
-            if (e.row != null) {
-               let selectedDataTable=wrapper.getDataTable();
-                var item = new EventData();
-                item.row = selectedDataTable.getValue(e.row,e.column);
-                item.column = selectedDataTable.getColumnLabel(e.column);
-                this.onmouseout.next(item);
-            }
+        this.w.google.visualization.events.addListener(wrapper.getChart(), 'onmouseout', ()=>  {
+            this.el.style.cursor='default';
+
         });
     }
 

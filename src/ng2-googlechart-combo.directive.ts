@@ -139,23 +139,13 @@ export class ComboChartDirective implements OnInit {
                 }
             }
         });
-        this.w.google.visualization.events.addListener(chart, 'onmouseover', (e) => {
-            if (e.row != null) {
-                var item = new EventData();
-                item.row = dataTable.getValue(e.row, 0);
-                item.column =    dataTable.getColumnLabel(e.column);
-                this.onmouseover.next(item);
-            }
-
-        });
-        this.w.google.visualization.events.addListener(chart, 'onmouseout', (e) => {
-            if (e.row != null) {
-                var item = new EventData();
-                item.row = dataTable.getValue(e.row, 0);
-                item.column =   dataTable.getColumnLabel(e.column);
-                this.onmouseout.next(item);
-            }
-        });
+         this.w.google.visualization.events.addListener(chart, 'onmouseover', ()=> {
+            this.el.style.cursor='pointer';
+          });
+          this.w.google.visualization.events.addListener(chart, 'onmouseout', ()=>  {
+              this.el.style.cursor='default';
+  
+          });
     }
 }
 export class EventData {
